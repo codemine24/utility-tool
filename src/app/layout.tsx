@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from '@/theme';
-import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
-import ModeSwitch from '@/components/ModeSwitch';
+import * as React from "react";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import theme from "@/theme";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import ModeSwitch from "@/components/ModeSwitch";
+import { Box } from "@mui/material";
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
@@ -14,8 +15,18 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {/* <ModeSwitch /> */}
-            {props.children}
+            <ModeSwitch />
+            <Box
+              sx={{
+                padding: "2rem",
+                maxWidth: "600px",
+                margin: "auto",
+                boxShadow: 3,
+                borderRadius: "8px",
+              }}
+            >
+              {props.children}
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

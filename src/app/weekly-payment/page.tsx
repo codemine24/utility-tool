@@ -59,15 +59,7 @@ export default function WeeklyPayment() {
   });
 
   return (
-    <Box
-      sx={{
-        padding: "2rem",
-        maxWidth: "600px",
-        margin: "auto",
-        boxShadow: 3,
-        borderRadius: "8px",
-      }}
-    >
+    <Box>
       <Stack spacing={2} direction="row" mb={2}>
         <Button
           variant="outlined"
