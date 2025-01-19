@@ -1,10 +1,29 @@
+"use client";
+import { Icon } from "@iconify/react";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
-import { Icon } from "@iconify/react";
+import React from "react";
+
+const projects = [
+  { href: "weekly-payment", name: "Weekly Payment" },
+  { href: "percent-calculator", name: "% Calculator" },
+  { href: "demo-project", name: "Demo Project" },
+];
 
 export default function Home() {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [filteredProjects, setFilteredProjects] = React.useState(projects);
+
+  const handleChange = (event: any) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(event.target.value);
+    const filteredProjects = projects.filter((project) =>
+      project.name.toLowerCase().includes(query)
+    );
+    setFilteredProjects(filteredProjects);
+  };
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2} my={4}>
@@ -14,6 +33,7 @@ export default function Home() {
             label="Search tools"
             variant="outlined"
             fullWidth
+            value={searchQuery}
             slotProps={{
               input: {
                 endAdornment: (
@@ -23,38 +43,21 @@ export default function Home() {
                 ),
               },
             }}
+            onChange={handleChange}
           />
         </Grid>
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Button
-            variant="contained"
-            component={Link}
-            href="/weekly-payment"
-            color="secondary"
-          >
-            Weekly Payment
-          </Button>
-        </Grid>
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Button
-            variant="contained"
-            component={Link}
-            href="/weekly-payment"
-            color="secondary"
-          >
-            Demo Tool
-          </Button>
-        </Grid>
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Button
-            variant="contained"
-            component={Link}
-            href="/weekly-payment"
-            color="secondary"
-          >
-            % Calculator
-          </Button>
-        </Grid>
+        {filteredProjects.map((project) => (
+          <Grid size={{ xs: 12, md: 4 }} key={project.name}>
+            <Button
+              variant="contained"
+              component={Link}
+              href={project.href}
+              color="secondary"
+            >
+              {project.name}
+            </Button>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );
