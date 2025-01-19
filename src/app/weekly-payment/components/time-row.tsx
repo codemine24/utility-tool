@@ -5,8 +5,9 @@ import Grid from "@mui/material/Grid2";
 interface ITimeRowProps {
   errors: any;
   onTimeChange: (time: number) => void;
+  value: number | string;
 }
-export const TimeRow = ({ errors, onTimeChange }: ITimeRowProps) => {
+export const TimeRow = ({ errors, onTimeChange, value }: ITimeRowProps) => {
   const [rows, setRows] = React.useState([
     {
       hour: "",
@@ -53,6 +54,12 @@ export const TimeRow = ({ errors, onTimeChange }: ITimeRowProps) => {
   React.useEffect(() => {
     calculateTime();
   }, [rows]);
+
+  React.useEffect(() => {
+    if (!value) {
+      setRows([{ hour: "", minute: "" }]);
+    }
+  }, [value]);
   return (
     <>
       {rows.map((row, index) => (

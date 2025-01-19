@@ -2,7 +2,8 @@ export const calculateWeeklyPayment = (
   min: string | number,
   commission: string | number,
   hourly_rate: string | number,
-  exchange_rate: string | number
+  exchange_rate: string | number,
+  ignoreUpworkCommission: boolean
 ) => {
   const parsedMin = Number(min);
   const parsedCommission = Number(commission);
@@ -12,7 +13,7 @@ export const calculateWeeklyPayment = (
 
   const totalPayment = totalHour * parsedHourlyRate;
   const projectOwnerCommission = parsedCommission / 100;
-  const upworkCommission = 10 / 100;
+  const upworkCommission = ignoreUpworkCommission ? 0 : 10 / 100;
   const toalPaymentAfterUpworkCommission =
     totalPayment * (1 - upworkCommission);
   const totalPayable =

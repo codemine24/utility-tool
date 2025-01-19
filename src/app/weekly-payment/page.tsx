@@ -1,6 +1,14 @@
 "use client";
 import { calculateWeeklyPayment } from "@/helper/helper";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Icon } from "@iconify/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -8,7 +16,6 @@ import React from "react";
 import { DetailsTable } from "./components/detials-table";
 import { TimeRow } from "./components/time-row";
 import { initialWeeklyPayment } from "./utils/weekly-paymen.types";
-import { Icon } from "@iconify/react";
 
 export default function WeeklyPayment() {
   const [calculatedValue, setCalculatedValue] = React.useState<{
@@ -24,6 +31,8 @@ export default function WeeklyPayment() {
     upworkCommissionAmount: 0,
     projectOwnerCommissionAmount: 0,
   });
+  const [ignoreUpworkCommission, setIgnoreUpworkCommission] =
+    React.useState(false);
 
   const {
     values,
@@ -51,7 +60,8 @@ export default function WeeklyPayment() {
         values.minute,
         values.commission,
         values.hourly_rate,
-        values.exchange_rate
+        values.exchange_rate,
+        ignoreUpworkCommission
       );
       setCalculatedValue(calcualtedValue);
     },
@@ -59,7 +69,22 @@ export default function WeeklyPayment() {
 
   const handleReset = () => {
     setValues(initialWeeklyPayment);
+    setCalculatedValue((pre) => ({
+      ...pre,
+      totalHour: 0,
+    }));
   };
+
+  React.useEffect(() => {
+    const calcualtedValue = calculateWeeklyPayment(
+      values.minute,
+      values.commission,
+      values.hourly_rate,
+      values.exchange_rate,
+      ignoreUpworkCommission
+    );
+    setCalculatedValue(calcualtedValue);
+  }, [ignoreUpworkCommission]);
 
   return (
     <Box>
@@ -80,6 +105,13 @@ export default function WeeklyPayment() {
           onClick={handleReset}
         >
           <Icon icon="system-uicons:reset" />
+        </Button>
+        <Button size="small" title="Ignore Upwork %" variant="outlined">
+          <Checkbox
+            checked={ignoreUpworkCommission}
+            onChange={(e) => setIgnoreUpworkCommission(e.target.checked)}
+            size="small"
+          />
         </Button>
 
         <Typography variant="h5">Weekly Payment</Typography>
@@ -142,6 +174,7 @@ export default function WeeklyPayment() {
           <Grid size={12}>
             <TimeRow
               errors={errors}
+              value={values.minute}
               onTimeChange={(time: number) => setFieldValue("minute", time)}
             />
           </Grid>
