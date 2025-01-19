@@ -9,7 +9,6 @@ import React from "react";
 const projects = [
   { href: "weekly-payment", name: "Weekly Payment" },
   { href: "percent-calculator", name: "% Calculator" },
-  { href: "demo-project", name: "Demo Project" },
 ];
 
 export default function Home() {
