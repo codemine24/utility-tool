@@ -8,6 +8,7 @@ import React from "react";
 import { DetailsTable } from "./components/detials-table";
 import { TimeRow } from "./components/time-row";
 import { initialWeeklyPayment } from "./utils/weekly-paymen.types";
+import { Icon } from "@iconify/react";
 
 export default function WeeklyPayment() {
   const [calculatedValue, setCalculatedValue] = React.useState<{
@@ -26,6 +27,7 @@ export default function WeeklyPayment() {
 
   const {
     values,
+    setValues,
     handleChange,
     handleBlur,
     errors,
@@ -36,9 +38,6 @@ export default function WeeklyPayment() {
     initialValues: initialWeeklyPayment,
     validate: (values) => {
       const errors: any = {};
-      if (!values.project_name) {
-        errors.project_name = "This field is required";
-      }
       if (!values.commission) {
         errors.commission = "This field is required";
       }
@@ -58,6 +57,10 @@ export default function WeeklyPayment() {
     },
   });
 
+  const handleReset = () => {
+    setValues(initialWeeklyPayment);
+  };
+
   return (
     <Box>
       <Stack spacing={2} direction="row" mb={2}>
@@ -70,6 +73,15 @@ export default function WeeklyPayment() {
         >
           ⏎
         </Button>
+        <Button
+          variant="outlined"
+          size="small"
+          title="Reset"
+          onClick={handleReset}
+        >
+          <Icon icon="system-uicons:reset" />
+        </Button>
+
         <Typography variant="h5">Weekly Payment</Typography>
       </Stack>
       <form onSubmit={handleSubmit}>
@@ -84,8 +96,6 @@ export default function WeeklyPayment() {
               value={values.project_name}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={touched.project_name && Boolean(errors.project_name)}
-              helperText={touched.project_name && errors.project_name}
             />
           </Grid>
           <Grid size={12}>
@@ -150,7 +160,7 @@ export default function WeeklyPayment() {
           totalHour={calculatedValue.totalHour}
           commission={values.commission}
           totalPayable={calculatedValue.totalPayable}
-          extimatedEarnings={calculatedValue.extimatedEarnings}
+          estimatedEarnings={calculatedValue.extimatedEarnings}
           exchange_rate={values.exchange_rate}
           upworkCommissionAmount={calculatedValue.upworkCommissionAmount}
           projectOwnerCommissionAmount={

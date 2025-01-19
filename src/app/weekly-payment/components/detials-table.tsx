@@ -14,7 +14,7 @@ import {
     totalHour: number;
     commission: string;
     totalPayable: number;
-    extimatedEarnings: number;
+    estimatedEarnings: number;
     exchange_rate: string;
     upworkCommissionAmount: number;
     projectOwnerCommissionAmount: number;
@@ -25,7 +25,7 @@ import {
     totalHour,
     commission,
     totalPayable,
-    extimatedEarnings,
+    estimatedEarnings,
     exchange_rate,
     upworkCommissionAmount,
     projectOwnerCommissionAmount,
@@ -73,8 +73,8 @@ import {
               </TableRow>
               {exchange_rate && (
                 <TableRow>
-                  <TableCell>Extimate Earnings</TableCell>
-                  <TableCell>৳{extimatedEarnings}</TableCell>
+                  <TableCell>Estimate Earnings</TableCell>
+                  <TableCell>৳{estimatedEarnings}</TableCell>
                 </TableRow>
               )}
             </TableBody>
