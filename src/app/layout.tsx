@@ -16,17 +16,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <ModeSwitch />
-            <Box
-              sx={{
-                padding: "2rem",
-                maxWidth: "600px",
-                margin: "auto",
-                boxShadow: 3,
-                borderRadius: "8px",
-              }}
-            >
-              {props.children}
-            </Box>
+            {props.children}
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
