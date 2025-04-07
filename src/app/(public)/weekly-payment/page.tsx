@@ -21,13 +21,13 @@ export default function WeeklyPayment() {
   const [calculatedValue, setCalculatedValue] = React.useState<{
     totalPayable: number;
     totalHour: number;
-    extimatedEarnings: number;
+    estimatedEarnings: number;
     upworkCommissionAmount: number;
     projectOwnerCommissionAmount: number;
   }>({
     totalHour: 0,
     totalPayable: 0,
-    extimatedEarnings: 0,
+    estimatedEarnings: 0,
     upworkCommissionAmount: 0,
     projectOwnerCommissionAmount: 0,
   });
@@ -56,14 +56,14 @@ export default function WeeklyPayment() {
       return errors;
     },
     onSubmit: (values) => {
-      const calcualtedValue = calculateWeeklyPayment(
+      const calculatedValue = calculateWeeklyPayment(
         values.minute,
         values.commission,
         values.hourly_rate,
         values.exchange_rate,
         ignoreUpworkCommission
       );
-      setCalculatedValue(calcualtedValue);
+      setCalculatedValue(calculatedValue);
     },
   });
 
@@ -76,14 +76,14 @@ export default function WeeklyPayment() {
   };
 
   React.useEffect(() => {
-    const calcualtedValue = calculateWeeklyPayment(
+    const calculatedValue = calculateWeeklyPayment(
       values.minute,
       values.commission,
       values.hourly_rate,
       values.exchange_rate,
       ignoreUpworkCommission
     );
-    setCalculatedValue(calcualtedValue);
+    setCalculatedValue(calculatedValue);
   }, [ignoreUpworkCommission]);
 
   return (
@@ -106,7 +106,7 @@ export default function WeeklyPayment() {
         >
           <Icon icon="system-uicons:reset" />
         </Button>
-        <Button size="small" title="Ignore Upwork %" variant="outlined">
+        <Button size="small" title="Check to ignore Upwork %" variant="outlined">
           <Checkbox
             checked={ignoreUpworkCommission}
             onChange={(e) => setIgnoreUpworkCommission(e.target.checked)}
@@ -191,9 +191,10 @@ export default function WeeklyPayment() {
         <DetailsTable
           project_name={values.project_name}
           totalHour={calculatedValue.totalHour}
+          hourlyRate={values.hourly_rate}
           commission={values.commission}
           totalPayable={calculatedValue.totalPayable}
-          estimatedEarnings={calculatedValue.extimatedEarnings}
+          estimatedEarnings={calculatedValue.estimatedEarnings}
           exchange_rate={values.exchange_rate}
           upworkCommissionAmount={calculatedValue.upworkCommissionAmount}
           projectOwnerCommissionAmount={

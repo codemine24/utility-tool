@@ -14,17 +14,17 @@ export const calculateWeeklyPayment = (
   const totalPayment = totalHour * parsedHourlyRate;
   const projectOwnerCommission = parsedCommission / 100;
   const upworkCommission = ignoreUpworkCommission ? 0 : 10 / 100;
-  const toalPaymentAfterUpworkCommission =
+  const totalPaymentAfterUpworkCommission =
     totalPayment * (1 - upworkCommission);
   const totalPayable =
-    toalPaymentAfterUpworkCommission * (1 - projectOwnerCommission);
+    totalPaymentAfterUpworkCommission * (1 - projectOwnerCommission);
 
   return {
     totalPayable,
     totalHour: totalHour,
-    extimatedEarnings: totalPayable * parsedExchangeRate,
-    upworkCommissionAmount: toalPaymentAfterUpworkCommission - totalPayment,
+    estimatedEarnings: totalPayable * parsedExchangeRate,
+    upworkCommissionAmount: totalPaymentAfterUpworkCommission - totalPayment,
     projectOwnerCommissionAmount:
-      toalPaymentAfterUpworkCommission * projectOwnerCommission,
+      totalPaymentAfterUpworkCommission * projectOwnerCommission,
   };
 };
