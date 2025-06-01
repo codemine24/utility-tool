@@ -28,3 +28,29 @@ export const calculateWeeklyPayment = (
       totalPaymentAfterUpworkCommission * projectOwnerCommission,
   };
 };
+
+export const calculatePercentage = (
+  totalEarning: string | number,
+  totalExpense: string | number,
+  fund: string | number
+) => {
+  const amountAfterExpense = Number(totalEarning) - Number(totalExpense);
+  const fundAmount = (Number(fund) / 100) * amountAfterExpense;
+  const amountAfterFund = amountAfterExpense - fundAmount;
+
+  const fazlyPercentage = 58;
+  const rapuPercentage = 42;
+
+  const fazlyCommission = ((fazlyPercentage / 100) * amountAfterFund).toFixed(3);
+  const rapuCommission = ((rapuPercentage / 100) * amountAfterFund).toFixed(3);
+
+  return {
+    totalEarning: Number(totalEarning).toLocaleString(),
+    totalExpense: Number(totalExpense).toLocaleString(),
+    amountAfterExpense: amountAfterExpense.toLocaleString(),
+    fund: fundAmount.toLocaleString(),
+    amountAfterFund: amountAfterFund.toLocaleString(),
+    fazlyCommission: Number(fazlyCommission).toLocaleString(),
+    rapuCommission: Number(rapuCommission).toLocaleString(),
+  };
+};
