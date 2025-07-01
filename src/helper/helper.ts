@@ -35,13 +35,17 @@ export const calculatePercentage = (
   fund: string | number
 ) => {
   const amountAfterExpense = Number(totalEarning) - Number(totalExpense);
-  const fundAmount = (Number(fund) / 100) * amountAfterExpense;
-  const amountAfterFund = amountAfterExpense - fundAmount;
+  const donation = amountAfterExpense * 0.01;
+  const amountAfterDonation = amountAfterExpense - donation;
+  const fundAmount = (Number(fund) / 100) * amountAfterDonation;
+  const amountAfterFund = amountAfterDonation - fundAmount;
 
   const fazlyPercentage = 58;
   const rapuPercentage = 42;
 
-  const fazlyCommission = ((fazlyPercentage / 100) * amountAfterFund).toFixed(3);
+  const fazlyCommission = ((fazlyPercentage / 100) * amountAfterFund).toFixed(
+    3
+  );
   const rapuCommission = ((rapuPercentage / 100) * amountAfterFund).toFixed(3);
 
   return {
@@ -52,5 +56,6 @@ export const calculatePercentage = (
     amountAfterFund: amountAfterFund.toLocaleString(),
     fazlyCommission: Number(fazlyCommission).toLocaleString(),
     rapuCommission: Number(rapuCommission).toLocaleString(),
+    donation: Number(donation).toLocaleString(),
   };
 };

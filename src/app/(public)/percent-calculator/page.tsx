@@ -85,7 +85,7 @@ export default function WeeklyPayment() {
               fullWidth
               id="total_earning"
               name="total_earning"
-              label="Total Earning"
+              label="Total Earning ৳"
               size="small"
               value={values.total_earning}
               onChange={handleChange}
@@ -99,7 +99,7 @@ export default function WeeklyPayment() {
               fullWidth
               id="total_expense"
               name="total_expense"
-              label="Total Expense"
+              label="Total Expense ৳"
               size="small"
               value={values.total_expense}
               onChange={handleChange}
@@ -143,6 +143,7 @@ export default function WeeklyPayment() {
           amountAfterFund={calculatedValue.amountAfterFund}
           fazlyCommission={calculatedValue.fazlyCommission}
           rapuCommission={calculatedValue.rapuCommission}
+          donation={calculatedValue.donation}
         />
       )}
     </Box>
