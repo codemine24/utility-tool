@@ -36,6 +36,7 @@ export interface IPercentageCalculation {
   amountAfterFund: string;
   fazlyCommission: string;
   rapuCommission: string;
+  donation: string;
 }
 
 export const initialPercentageCalculation: IPercentageCalculation = {
@@ -46,4 +47,5 @@ export const initialPercentageCalculation: IPercentageCalculation = {
   amountAfterFund: "",
   fazlyCommission: "",
   rapuCommission: "",
+  donation: "",
 };

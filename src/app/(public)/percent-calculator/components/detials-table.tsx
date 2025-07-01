@@ -18,6 +18,7 @@ interface IDetailsTableProps {
   amountAfterFund: string;
   fazlyCommission: string;
   rapuCommission: string;
+  donation: string;
 }
 
 export const PercentageDetailsTable = ({
@@ -29,6 +30,7 @@ export const PercentageDetailsTable = ({
   amountAfterFund,
   fazlyCommission,
   rapuCommission,
+  donation,
 }: IDetailsTableProps) => {
   return (
     <Box mt={4}>
@@ -48,6 +50,14 @@ export const PercentageDetailsTable = ({
               </TableCell>
             </TableRow>
             <TableRow>
+              <TableCell>Donation (1%)</TableCell>
+              <TableCell>
+                <Typography variant="body2" color="error">
+                  ৳{donation}
+                </Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
               <TableCell>Amount After Expense</TableCell>
               <TableCell>৳{amountAfterExpense}</TableCell>
             </TableRow>
@@ -60,7 +70,7 @@ export const PercentageDetailsTable = ({
               <TableCell>৳{amountAfterFund}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Fazly's Commission</TableCell>
+              <TableCell>Fazly (58%)</TableCell>
               <TableCell>
                 <Typography variant="body2" color="success">
                   ৳{fazlyCommission}
@@ -68,7 +78,7 @@ export const PercentageDetailsTable = ({
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Rapu's Commission</TableCell>
+              <TableCell>Rapu (42%)</TableCell>
               <TableCell>
                 <Typography variant="body2" color="success">
                   ৳{rapuCommission}
